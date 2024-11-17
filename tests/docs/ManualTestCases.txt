@@ -1,0 +1,60 @@
+### Feature: Login
+
+# TC-01
+[Scenario] Successful login with valid credentials
+Given the user is on the login page
+When the user enters "standard_user" as username and "secret_sauce" as password
+And clicks on the "Login" button
+Then the user should be redirected to the "Products" page
+
+# TC-02
+[Scenario] login fails with invalid credentials
+Given the user is on the login page
+When the user enters "invalid_user" as username and "wrong_password" as password
+And clicks on the "Login" button
+Then the user should see and error message saying "Username and password do not match"
+
+# TC-03
+[Scenario] Login fails with empty fields
+Given the user is on the login page
+When the user enters "invalid_user" as username and "wrong_password" as password
+And clicks on the "Login" button
+Then the user should see and error message saying "Username and password do not match"
+
+### Feature: Cart Management
+
+# TC-01
+[Scenario] Add a single item to the cart
+Given the user is logged in and on the "Products" page
+When the user clicks "Add to Cart" for "Sauce Labs Backpack"
+Then the cart badge should display "1"
+
+# TC-02
+[Scenario] Remove an item from Cart
+Given the user has added "Sauce Labs Backpack" to the Cart
+When the user click "Remove" on the "Products" page
+Then the cart badge should disappear
+
+# TC-03
+[Scenario] View cart
+Given the user has items in their cart
+When the user clicks the "Cart" icon
+Then the user should see a summary of all items in the cart
+
+### Feature: Checkout Process
+
+# TC-01
+[Scenario] Complete checkout successfully
+Given the users has items in their cart
+And clicks the "Cart" icon
+When the user clicks the "Checkout" button
+And fills out their details:
+   * First Name: TestUser *
+   * Last Name: userV1 *
+   * Zip Code: 01234 *
+And clicks "Continue"
+Then the user should see the "Checkout: Overview" page
+And clicks "Continue"
+Then the user should see the "Checkout: Overview" page
+And click "Finish"
+Then the user should see a "Thank you for your order!" message

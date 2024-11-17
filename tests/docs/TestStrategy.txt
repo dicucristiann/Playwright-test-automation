@@ -1,0 +1,26 @@
+Objective:
+ To validate the functionality, performance, and internationalization of the Sauce Labs Demo Website[https://www.saucedemo.com/]. 
+ - creating a mix of manual and automated testing.
+ 
+ Critical Features:
+ 1. Login
+  * Ensure users can log in with valid credentials and see appropriate error messages for invalid inputs.
+ 2. Cart Management:
+  * Validate adding/removing items to/from the cart and ensuring the cart reflects the correct number of items.
+ 3. Checkout Process:
+  * Test the ability to complete the checkout flow, including form validation and order completion.
+
+  -------------------------------
+ Low-Priority features:
+ 1. UI/UX [buttons; color; font].
+ 2. Footer links like "About Us".
+ 3. Accessibility tests for sections.
+
+   -------------------------------
+Testing Approach:
+ * Manual Testing: used for exploratory tests and less critical features like UI/UX validations.
+ * Automated Testing: Focusing on high-priority functional flows [Login; Cart Management; Checkout].
+
+   -------------------------------
+Traceability:
+ * Map test cases to features and requirements unsing simple spreadsheet.
