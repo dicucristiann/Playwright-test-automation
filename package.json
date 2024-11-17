@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "node tests/helpers/test-setup.js",
+    "report": "npx playwright show-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.48.2",
     "@types/node": "^22.9.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }

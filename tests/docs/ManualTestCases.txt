@@ -8,7 +8,7 @@ And clicks on the "Login" button
 Then the user should be redirected to the "Products" page
 
 # TC-02
-[Scenario] login fails with invalid credentials
+[Scenario] Login fails with invalid credentials
 Given the user is on the login page
 When the user enters "invalid_user" as username and "wrong_password" as password
 And clicks on the "Login" button
@@ -23,19 +23,19 @@ Then the user should see and error message saying "Username and password do not 
 
 ### Feature: Cart Management
 
-# TC-01
+# TC-04
 [Scenario] Add a single item to the cart
 Given the user is logged in and on the "Products" page
 When the user clicks "Add to Cart" for "Sauce Labs Backpack"
 Then the cart badge should display "1"
 
-# TC-02
+# TC-05
 [Scenario] Remove an item from Cart
 Given the user has added "Sauce Labs Backpack" to the Cart
 When the user click "Remove" on the "Products" page
 Then the cart badge should disappear
 
-# TC-03
+# TC-06
 [Scenario] View cart
 Given the user has items in their cart
 When the user clicks the "Cart" icon
@@ -43,7 +43,7 @@ Then the user should see a summary of all items in the cart
 
 ### Feature: Checkout Process
 
-# TC-01
+# TC-07
 [Scenario] Complete checkout successfully
 Given the users has items in their cart
 And clicks the "Cart" icon
@@ -58,3 +58,33 @@ And clicks "Continue"
 Then the user should see the "Checkout: Overview" page
 And click "Finish"
 Then the user should see a "Thank you for your order!" message
+
+# TC-08
+[Scenario] Checkout fails with missing fields
+Given the user has items in their cart
+And clicks the "Checkout" button
+When the user leaves "First Name" empty
+And clicks "Continue"
+Then the user should see an error message "First Name is required"
+
+When the user leaves "Last Name" empty
+And clicks "Continue"
+Then the user should see an error message "Last Name is required"
+
+When the user leaves "Postal Code" empty
+And clicks "Continue"
+Then the user should see an error message "Postal Code is required"
+
+ note* the above scenario has repetitive structure: we cand use a [Scenario Outline] in this case.
+
+[Scenario Outline] Checkout fails with missing fields
+Given the user has items in their cart
+And clicks the "Checkout" button
+When the user leaves "<Field>" empty
+And clicks "Continue"
+Then the user should see an error message saying "<Error Message>"
+ Examples:
+  Field                 Error Message
+   * First Name          * Frist name is required
+   * Last Name           * Frist name is required
+   * Postal Code         * Postal Code is required
