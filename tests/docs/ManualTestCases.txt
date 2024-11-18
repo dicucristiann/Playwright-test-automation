@@ -2,89 +2,147 @@
 
 # TC-01
 [Scenario] Successful login with valid credentials
-Given the user is on the login page
-When the user enters "standard_user" as username and "secret_sauce" as password
-And clicks on the "Login" button
-Then the user should be redirected to the "Products" page
+   Given the user is on the login page
+   When the user enters "standard_user" as username and "secret_sauce" as password
+   And clicks on the "Login" button
+   Then the user should be redirected to the "Products" page
 
 # TC-02
 [Scenario] Login fails with invalid credentials
-Given the user is on the login page
-When the user enters "invalid_user" as username and "wrong_password" as password
-And clicks on the "Login" button
-Then the user should see and error message saying "Username and password do not match"
+   Given the user is on the login page
+   When the user enters "invalid_user" as username and "wrong_password" as password
+   And clicks on the "Login" button
+   Then the user should see and error message saying "Username and password do not match"
 
 # TC-03
 [Scenario] Login fails with empty fields
-Given the user is on the login page
-When the user enters "invalid_user" as username and "wrong_password" as password
-And clicks on the "Login" button
-Then the user should see and error message saying "Username and password do not match"
+   Given the user is on the login page
+   When the user enters "invalid_user" as username and "wrong_password" as password
+   And clicks on the "Login" button
+   Then the user should see and error message saying "Username and password do not match"
 
 ### Feature: Cart Management
 
 # TC-04
 [Scenario] Add a single item to the cart
-Given the user is logged in and on the "Products" page
-When the user clicks "Add to Cart" for "Sauce Labs Backpack"
-Then the cart badge should display "1"
+   Given the user is logged in and on the "Products" page
+   When the user clicks "Add to Cart" for "Sauce Labs Backpack"
+   Then the cart badge should display "1"
 
 # TC-05
 [Scenario] Remove an item from Cart
-Given the user has added "Sauce Labs Backpack" to the Cart
-When the user click "Remove" on the "Products" page
-Then the cart badge should disappear
+   Given the user has added "Sauce Labs Backpack" to the Cart
+   When the user click "Remove" on the "Products" page
+   Then the cart badge should disappear
 
 # TC-06
 [Scenario] View cart
-Given the user has items in their cart
-When the user clicks the "Cart" icon
-Then the user should see a summary of all items in the cart
+   Given the user has items in their cart
+   When the user clicks the "Cart" icon
+   Then the user should see a summary of all items in the cart
 
 ### Feature: Checkout Process
 
 # TC-07
 [Scenario] Complete checkout successfully
-Given the users has items in their cart
-And clicks the "Cart" icon
-When the user clicks the "Checkout" button
-And fills out their details:
-   * First Name: TestUser *
-   * Last Name: userV1 *
-   * Zip Code: 01234 *
-And clicks "Continue"
-Then the user should see the "Checkout: Overview" page
-And clicks "Continue"
-Then the user should see the "Checkout: Overview" page
-And click "Finish"
-Then the user should see a "Thank you for your order!" message
+   Given the users has items in their cart
+   And clicks the "Cart" icon
+   When the user clicks the "Checkout" button
+   And fills out their details:
+      * First Name: TestUser *
+      * Last Name: userV1 *
+      * Zip Code: 01234 *
+   And clicks "Continue"
+   Then the user should see the "Checkout: Overview" page
+   And clicks "Continue"
+   Then the user should see the "Checkout: Overview" page
+   And click "Finish"
+   Then the user should see a "Thank you for your order!" message
 
 # TC-08
 [Scenario] Checkout fails with missing fields
-Given the user has items in their cart
-And clicks the "Checkout" button
-When the user leaves "First Name" empty
-And clicks "Continue"
-Then the user should see an error message "First Name is required"
+   Given the user has items in their cart
+   And clicks the "Checkout" button
+   When the user leaves "First Name" empty
+   And clicks "Continue"
+   Then the user should see an error message "First Name is required"
 
-When the user leaves "Last Name" empty
-And clicks "Continue"
-Then the user should see an error message "Last Name is required"
+   When the user leaves "Last Name" empty
+   And clicks "Continue"
+   Then the user should see an error message "Last Name is required"
 
-When the user leaves "Postal Code" empty
-And clicks "Continue"
-Then the user should see an error message "Postal Code is required"
+   When the user leaves "Postal Code" empty
+   And clicks "Continue"
+   Then the user should see an error message "Postal Code is required"
 
  note* the above scenario has repetitive structure: we cand use a [Scenario Outline] in this case.
 
 [Scenario Outline] Checkout fails with missing fields
-Given the user has items in their cart
-And clicks the "Checkout" button
-When the user leaves "<Field>" empty
-And clicks "Continue"
-Then the user should see an error message saying "<Error Message>"
- Examples:
-  Field                 Error Message
-   * First Name          * Frist name is required
-   * Last Name           * Frist name is required
-   * Postal Code         * Postal Code is required
+   Given the user has items in their cart
+   And clicks the "Checkout" button
+   When the user leaves "<Field>" empty
+   And clicks "Continue"
+   Then the user should see an error message saying "<Error Message>"
+   Examples:
+   Field                 Error Message
+      * First Name          * Frist name is required
+      * Last Name           * Frist name is required
+      * Postal Code         * Postal Code is required
+
+### Feature: Filtering Items on the Products Page
+
+# TC-09
+[Scenario] Filter items by price (low to high)
+   Given the user is logged in and on the "Products" page
+   When the user selects the "Price (low to high)" filter from dropdown
+   Then the items should be displayed in ascending order of their prices
+
+# TC-10
+[Scenario] Filter items by price (A to Z)
+   Given the user is logged in and on the "Products" page
+   When the user selects the "Name (A to Z)" filter from dropdown
+   Then the items should be displayed in alfabetical order
+
+### Feature: Responsive Testing
+
+# TC-11
+[Scenario] Test site responsivness on mobile devices
+   Given the user accesses the site on mobile devices
+   When the screen size is reduced to 375px by 677px [Iphone SE]
+   Then all elements should resize appropiatly
+   And the navigation menu should collapse into mobile menu
+
+# TC-12
+[Scenario] Test site responsivness on tablet
+   Given the user accesses the site on tablet devices
+   When the screen size is reduced to 768px by 1024px [iPad Mini]
+   Then all elements should display correctly without horizontal scrolling
+
+### Feature: Logout Functionality
+
+# TC-13
+[Scenario] Successful logout
+   Given the user is logged in and on the "Products" page
+   When the user clicks on the "Menu" button
+   And selects the "Logout" option
+   Then the user is redirected to the login page
+
+# TC-14
+[Scenario] Verify logout session termination
+   Given the user is logged in and has logged out
+   When the user tries to access the "Products" page without logging in
+   Then the user should be redirected to the login page
+
+### Feature: Cart Behavior Across Multiple Sessions
+# TC-15
+[Scenario] Verify cart persists accross browser tabs
+   Given the user is logged in and adds items to the cart
+   When the user opens a new tab and logs in with the same account
+   Then the cart should display the same items
+
+# TC-16
+[Scenario] Verify cart clears after logout
+   Given the user is logged in and adds items to the cart
+   When the user logs out
+   And logs back in
+   Then the cart shloud be empty
