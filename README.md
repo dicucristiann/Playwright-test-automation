@@ -16,7 +16,7 @@ This framework uses **Playwright** for end-to-end testing. It is designed to be 
 ### **1. Clone the Repository**
 To get started, clone this repository to your local machine using:
 ```bash
-git clone (https://github.com/dicucristiann/Playwright-test-automation.git)
+git clone https://github.com/dicucristiann/Playwright-test-automation.git
 ```
 
 ### **2. Navigate to the project directory**
