@@ -46,13 +46,7 @@ SHOW_REPORT=true                           # Show report after test execution
 
 ## **Running Tests**
 
-### **1. Run All Tests**
-Execute all test files using:
-```bash
-npm test
-```
-
-### **2. Run a Specific Test**
+### **1. Run a Specific Test**
 To run a specific test, update the `TEST_RUN` variable in the `.env` file with the desired test path:
 ```plaintext
 TEST_RUN=tests/e2e/checkoutSuccess.test.js
