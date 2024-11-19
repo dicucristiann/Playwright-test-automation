@@ -36,6 +36,7 @@ Set up a `.env` file in the root directory based on the provided `.env.example`.
 ```plaintext
 BASE_URL=https://www.saucedemo.com/        # Base URL for the website under test
 TEST_RUN=tests/e2e/checkoutSuccess.test.js # Test file to execute
+HEADED=true                                # Opens browser if set true
 USER_NAME=standard_user                    # Test username
 PASSWORD=secret_sauce                      # Test password
 SHOW_REPORT=true                           # Show report after test execution
