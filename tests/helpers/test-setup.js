@@ -1,12 +1,16 @@
 require('dotenv').config({ path: './.env' });
 const { exec } = require('child_process');
 
-const testFile = process.env.TEST_RUN || ''; // Will run all tests if empty
+const defaultTestFile = 'tests/e2e/checkoutSuccess.test.js';
+const testFile = process.env.TEST_RUN || defaultTestFile;
+
 const showReport = process.env.SHOW_REPORT === 'true' && process.env.CI !== 'true';
 const headed = process.env.HEADED === 'true' ? '--headed' : '';
 
-if (!testFile) {
-    console.log('TEST_RUN not specified. Running all tests...');
+if (process.env.TEST_RUN) {
+    console.log(`Running specified test file: ${testFile}`);
+} else {
+    console.log(`TEST_RUN not specified. Back to default test: ${defaultTestFile}`);
 }
 
 exec(`npx playwright test ${testFile} ${headed}`, (error, stdout, stderr) => {
@@ -20,7 +24,6 @@ exec(`npx playwright test ${testFile} ${headed}`, (error, stdout, stderr) => {
     }
     console.log(stdout); // results
 
-    // Will generate report if SHOW_REPORT=true
     if (showReport) {
         console.log('Generating Playwright report...');
         exec('npx playwright show-report', (reportError, reportStdout, reportStderr) => {
